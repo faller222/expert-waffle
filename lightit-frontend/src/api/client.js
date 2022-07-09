@@ -28,7 +28,7 @@ module.exports = {
         },
         diagnosis(symptoms, gender, year_of_birth) {
             const headers = {Authorization: 'Bearer ' + _token}
-            const params = {symptoms, gender, year_of_birth}
+            const params = {symptoms:symptoms.join(','), gender, year_of_birth}
             return medic.get('medic/diagnosis', {headers, params})
         },
     }
