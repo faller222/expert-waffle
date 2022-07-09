@@ -1,7 +1,7 @@
 const axios = require('axios')
 
-const medic = axios.create({baseURL: 'https://lightit-backend.herokuapp.com/'})
-// const medic = axios.create({baseURL: 'http://localhost:8000/'})
+// const medic = axios.create({baseURL: 'https://lightit-backend.herokuapp.com/'})
+const medic = axios.create({baseURL: 'http://localhost:8080/'})
 let _token = null
 
 module.exports = {

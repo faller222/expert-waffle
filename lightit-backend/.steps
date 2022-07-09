@@ -27,7 +27,11 @@ py manage.py shell
 py manage.py createsuperuser --username=admin --email=admin@example.com
 
 ## Heroku
-git push heroku master
+heroku git:remote -a lightit-backend
+git add .
+git commit -m "."
+git push -f heroku master
+heroku git:clone -a lightit-backend
 py manage.py collectstatic --noinput
 heroku run python manage.py migrate
 heroku logs
