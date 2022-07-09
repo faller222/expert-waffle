@@ -1,0 +1,33 @@
+py -m venv ./venv
+.\venv\Scripts\activate.ps1
+py -m pip install --upgrade pip
+
+pip install Django
+pip install djangorestframework
+pip install django-cors-headers
+pip install requests
+pip install requests-cache
+pip install psycopg2
+
+
+pip freeze > requirements.txt
+pip install -r requirements.txt
+
+py -m django --version
+django-admin startproject medic
+py manage.py startapp api
+
+py manage.py runserver 0.0.0.0:8080
+
+py manage.py migrate
+py manage.py makemigrations api
+py manage.py sqlmigrate api 0001
+py manage.py shell
+
+py manage.py createsuperuser --username=admin --email=admin@example.com
+
+## Heroku
+git push heroku master
+py manage.py collectstatic --noinput
+heroku run python manage.py migrate
+heroku logs
