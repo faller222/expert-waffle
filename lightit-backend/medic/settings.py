@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
+    'diagnosis.apps.DiagnosisConfig',
     'users.apps.UsersConfig',
     'client.apps.ClientConfig',
     'django.contrib.admin',

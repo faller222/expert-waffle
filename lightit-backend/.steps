@@ -27,6 +27,7 @@ py manage.py shell
 py manage.py createsuperuser --username=admin --email=admin@example.com
 
 ## Heroku
+git init
 heroku git:remote -a lightit-backend
 git add .
 git commit -m "."

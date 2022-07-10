@@ -1,0 +1,310 @@
+{
+	"info": {
+		"_postman_id": "5cba409b-66f4-49a0-b059-920f50854ffb",
+		"name": "Medic",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20063446"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "New User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user1\",\r\n    \"email\": \"test@dom.com\",\r\n    \"first_name\": \"Name\",\r\n    \"last_name\": \"Family\",\r\n    \"password\": \"4d6as4wea21sd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://lightit-backend.herokuapp.com/users/",
+							"protocol": "https",
+							"host": [
+								"lightit-backend",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "18cb211984479537a7df7beec258131b3c01c075",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"newPassword\",\r\n    \"last_name\": \"family\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://lightit-backend.herokuapp.com/users/user1",
+							"protocol": "https",
+							"host": [
+								"lightit-backend",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"user1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auth",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user1\",\r\n    \"password\": \"newPassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://lightit-backend.herokuapp.com/users/auth/",
+							"protocol": "https",
+							"host": [
+								"lightit-backend",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"auth",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Medic",
+			"item": [
+				{
+					"name": "Auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "18cb211984479537a7df7beec258131b3c01c075",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://lightit-backend.herokuapp.com/medic/auth",
+							"protocol": "https",
+							"host": [
+								"lightit-backend",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"medic",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "symptoms",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "18cb211984479537a7df7beec258131b3c01c075",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://lightit-backend.herokuapp.com/medic/symptoms",
+							"protocol": "https",
+							"host": [
+								"lightit-backend",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"medic",
+								"symptoms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "diagnosis",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "18cb211984479537a7df7beec258131b3c01c075",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://lightit-backend.herokuapp.com/medic/diagnosis?symptoms=[10,15,11]&gender=male&year_of_birth=1993",
+							"protocol": "https",
+							"host": [
+								"lightit-backend",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"medic",
+								"diagnosis"
+							],
+							"query": [
+								{
+									"key": "symptoms",
+									"value": "[10,15,11]"
+								},
+								{
+									"key": "gender",
+									"value": "male"
+								},
+								{
+									"key": "year_of_birth",
+									"value": "1993"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Diagnosis",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "18cb211984479537a7df7beec258131b3c01c075",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://lightit-backend.herokuapp.com/diagnosis/",
+							"protocol": "https",
+							"host": [
+								"lightit-backend",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"diagnosis",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "18cb211984479537a7df7beec258131b3c01c075",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"test\":\"test\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://lightit-backend.herokuapp.com/diagnosis/",
+							"protocol": "https",
+							"host": [
+								"lightit-backend",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"diagnosis",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
