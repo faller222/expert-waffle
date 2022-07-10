@@ -1,6 +1,6 @@
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {isShowingRegisterForm, selectToken} from './userSlice';
+import {useSelector} from 'react-redux';
+import {isShowingRegisterForm} from './userSlice';
 import {UserLogin} from "./UserLogin";
 import {UserRegister} from "./UserRegister";
 
