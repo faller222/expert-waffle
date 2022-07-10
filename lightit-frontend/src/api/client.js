@@ -4,6 +4,8 @@ const medic = axios.create({baseURL: 'https://lightit-backend.herokuapp.com/'})
 // const medic = axios.create({baseURL: 'http://localhost:8080/'})
 let _token = null
 
+const examples = require('../features/diagnosis/examples.json')
+
 module.exports = {
     setToken(token) {
         _token = token
@@ -31,6 +33,15 @@ module.exports = {
             const params = {symptoms:`[${symptoms.join(',')}]`, gender, year_of_birth}
             return medic.get('medic/diagnosis', {headers, params})
         },
+    },
+    diagnosis: {
+        create(diagnosis) {
+            console.log("Persisting Diagnosis", diagnosis)
+        },
+        get() {
+            console.log("Getting Diagnosis")
+            return examples
+        }
     }
 
 }

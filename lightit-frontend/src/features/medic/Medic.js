@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import logo from "./logo.png";
-import {getDiagnosis, getSymptoms, selectSymptoms} from "./medicSlice";
+import {getDiagnosis, getSymptoms, selectDiagnosis, selectSymptoms} from "./medicSlice";
 import {TrashIcon} from '@heroicons/react/solid'
-import {Diagnosis} from "./Diagnosis";
+import {Diagnosis} from "../diagnosis/Diagnosis";
 
-
-const examples = require('./examples.json')
 
 const currentYear = (new Date()).getFullYear()
 
@@ -24,6 +22,7 @@ export function Medic() {
     }, [dispatch]);
 
     const symptomsOptions = useSelector(selectSymptoms);
+    const diagnosis = useSelector(selectDiagnosis);
 
     const selectSymptom = (symptomId) => {
         symptoms[symptomId] = symptomsOptions[symptomId]
@@ -43,10 +42,28 @@ export function Medic() {
         dispatch(getDiagnosis({symptoms: Object.keys(symptoms), gender, year_of_birth: year}))
     }
 
+    const diagnosisElement = () => {
+        if (diagnosis && diagnosis.length)
+            return <div
+                className="min-h-full flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-3xl w-full space-y-8">
+                    <div>
+                        <h3 className="ml-2 text-2xl font-extrabold text-gray-900">Diagnosis:</h3>
+                    </div>
+
+                    <div className="shadow max-h-screen overflow-hidden hover:overflow-auto sm:rounded-md">
+                        {diagnosis.map(e => <Diagnosis key={e.Issue.ID.toString()} value={e}/>)}
+                    </div>
+                </div>
+            </div>
+        else
+            return <></>
+    }
+
     return (
         <>
-            <div className=" min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-md w-full space-y-8">
+            <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-3xl w-full space-y-8">
                     <div>
                         <img className="mx-auto h-12 w-auto" src={logo} alt="Workflow"/>
                         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Check diagnosis</h2>
@@ -156,17 +173,8 @@ export function Medic() {
                     </form>
                 </div>
             </div>
-            <div className="min-h-full flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-md w-full space-y-8">
-                    <div>
-                        <h3 className="ml-2 text-2xl font-extrabold text-gray-900">Diagnosis:</h3>
-                    </div>
 
-                    <div className="shadow overflow-hidden sm:rounded-md">
-                        {examples.map(e => <Diagnosis value={e}/>)}
-                    </div>
-                </div>
-            </div>
+            {diagnosisElement()}
         </>
 
     )

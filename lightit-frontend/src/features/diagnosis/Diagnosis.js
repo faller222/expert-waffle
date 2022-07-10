@@ -4,9 +4,12 @@ import {useDispatch} from "react-redux";
 
 export function Diagnosis({value}) {
 
-
     const dispatch = useDispatch();
     const [show, setShow] = useState(false);
+
+    const confirmDiagnosis = () => {
+//        dispatch(getDiagnosis(value))
+    }
 
     const mergeICD = (icd, icdName) => {
 
@@ -21,7 +24,7 @@ export function Diagnosis({value}) {
     }
 
     return (
-        <div id={value.Issue.ID} className="px-4 py-2 bg-white sm:p-6">
+        <div id={value.Issue.ID}  className="px-4 py-2 bg-white sm:p-6">
 
             <div className="toggle-head cursor-pointer" onClick={toggle}>
                 <div>
@@ -45,12 +48,11 @@ export function Diagnosis({value}) {
                     <table className="my-2 ml-5 table-fixed">
                         {mergeICD(value.Issue.Icd, value.Issue.IcdName)
                             .map(i => <tr>
-                                <td>{i.id}</td>
-                                <td>{i.name}</td>
+                                <td className="bg-gray-100 px-2">{i.id}</td>
+                                <td className="bg-gray-200 px-4">{i.name}</td>
                             </tr>)}
                     </table>
                 </div>
-
 
                 <h5 className="mt-5 font-bold text-gray-900">Specialisation:</h5>
                 <ul>

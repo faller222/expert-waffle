@@ -8,7 +8,6 @@ export const getSymptoms = createAsyncThunk('medic/getSymptoms', async () => {
 })
 
 export const getDiagnosis = createAsyncThunk('medic/getDiagnosis', async ({symptoms, gender, year_of_birth}) => {
-    console.log(symptoms, gender, year_of_birth)
     const response = await medic.diagnosis(symptoms, gender, year_of_birth)
     return response.data
 })
@@ -17,7 +16,7 @@ export const medicSlice = createSlice({
     name: 'medic',
     initialState: {
         symptoms: [],
-        diagnosis: null,
+        diagnosis: [],
     },
     reducers: {},
     extraReducers: (builder) => {
