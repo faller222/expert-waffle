@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import logo from "./logo.png";
 import {getDiagnosis, getSymptoms, selectSymptoms} from "./medicSlice";
@@ -6,7 +6,7 @@ import {TrashIcon} from '@heroicons/react/solid'
 import {Diagnosis} from "./Diagnosis";
 
 
-const examples  = require('./examples.json')
+const examples = require('./examples.json')
 
 const currentYear = (new Date()).getFullYear()
 
@@ -125,7 +125,7 @@ export function Medic() {
                                                         <td>{s.Name}</td>
                                                     </tr>) :
                                                 <tr>
-                                                    <td>Select symptom</td>
+                                                    <td>Select a symptom</td>
                                                 </tr>}
                                             </tbody>
                                         </table>
@@ -156,7 +156,17 @@ export function Medic() {
                     </form>
                 </div>
             </div>
-            {examples.map(e=><Diagnosis value={e}/>)}
+            <div className="min-h-full flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-md w-full space-y-8">
+                    <div>
+                        <h3 className="ml-2 text-2xl font-extrabold text-gray-900">Diagnosis:</h3>
+                    </div>
+
+                    <div className="shadow overflow-hidden sm:rounded-md">
+                        {examples.map(e => <Diagnosis value={e}/>)}
+                    </div>
+                </div>
+            </div>
         </>
 
     )
