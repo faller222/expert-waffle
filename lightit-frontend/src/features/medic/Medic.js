@@ -2,9 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import logo from "./logo.png";
 import {getDiagnosis, getSymptoms, selectDiagnosis, selectSymptoms} from "./medicSlice";
+import {getHistoricDiagnosis, selectHistoricDiagnosis} from "../diagnosis/diagnosisSlice";
 import {TrashIcon} from '@heroicons/react/solid'
-import {Diagnosis} from "../diagnosis/Diagnosis";
 
+import {Diagnosis} from "../diagnosis/Diagnosis";
 
 const currentYear = (new Date()).getFullYear()
 
@@ -19,10 +20,12 @@ export function Medic() {
     useEffect(() => {
         // fixme Calling Twice
         dispatch(getSymptoms())
+        dispatch(getHistoricDiagnosis())
     }, [dispatch]);
 
     const symptomsOptions = useSelector(selectSymptoms);
     const diagnosis = useSelector(selectDiagnosis);
+    const historic = useSelector(selectHistoricDiagnosis);
 
     const selectSymptom = (symptomId) => {
         symptoms[symptomId] = symptomsOptions[symptomId]
@@ -59,6 +62,26 @@ export function Medic() {
         else
             return <></>
     }
+
+    const renderDiagnosisList = (name, list) => {
+        if (list && list.length)
+            return <div
+                className="min-h-full flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-3xl w-full space-y-8">
+                    <div>
+                        <h3 className="ml-2 text-2xl font-extrabold text-gray-900">{name}:</h3>
+                    </div>
+
+                    <div className="shadow max-h-screen overflow-hidden hover:overflow-auto sm:rounded-md">
+                        {list.map(e => <Diagnosis value={e}/>)}
+                    </div>
+                </div>
+            </div>
+        else
+            return <></>
+    }
+
+
 
     return (
         <>
@@ -174,7 +197,8 @@ export function Medic() {
                 </div>
             </div>
 
-            {diagnosisElement()}
+            {renderDiagnosisList('Diagnosis',diagnosis)}
+            {renderDiagnosisList('Historic',historic)}
         </>
 
     )

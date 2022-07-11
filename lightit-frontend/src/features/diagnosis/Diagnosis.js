@@ -1,14 +1,15 @@
 import React, {useState} from 'react';
 import _ from 'underscore'
 import {useDispatch} from "react-redux";
+import {confirmDiagnosis} from "./diagnosisSlice";
 
 export function Diagnosis({value}) {
 
     const dispatch = useDispatch();
     const [show, setShow] = useState(false);
 
-    const confirmDiagnosis = () => {
-//        dispatch(getDiagnosis(value))
+    const confirm = () => {
+        dispatch(confirmDiagnosis(value))
     }
 
     const mergeICD = (icd, icdName) => {
@@ -22,12 +23,17 @@ export function Diagnosis({value}) {
     const toggle = () => {
         setShow(!show)
     }
+    const formatDate = (date= new Date()) => {
+        return `${date.getFullYear()}-${(date.getMonth() + 1)}-${date.getDate()}`
+    }
 
     return (
-        <div id={value.Issue.ID}  className="px-4 py-2 bg-white sm:p-6">
+        <div id={value.Issue.ID} className="px-4 py-2 bg-white sm:p-6">
 
             <div className="toggle-head cursor-pointer" onClick={toggle}>
                 <div>
+                    {value._datetime ?
+                        <h5 className="ml-2 font-bold text-gray-400">{formatDate(value.datetime)}</h5> : <></>}
                     <h4 className="ml-2 text-xl font-extrabold text-gray-900">{value.Issue.Ranking} - {value.Issue.Name}</h4>
                     <h5 className="ml-10 font-bold text-gray-400">{value.Issue.ProfName}</h5>
                 </div>
@@ -58,6 +64,15 @@ export function Diagnosis({value}) {
                 <ul>
                     {value.Specialisation.map(s => <li className="ml-5">{s.Name}</li>)}
                 </ul>
+
+
+                {value._datetime ? <></> : <div className="text-right">
+                    <button
+                        type="button"
+                        className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                        onClick={confirm}
+                    >Accept Diagnosis</button>
+                </div>}
             </div>
         </div>
     )
